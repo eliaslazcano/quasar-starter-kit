@@ -1,11 +1,13 @@
 {
-  "name": "quasarapp",
-  "version": "0.0.1",
-  "description": "Quasar App",
+  "name": "@eliaslazcano/quasarapp",
+  "version": "1.0.0",
+  "description": "Starter kit para projetos Quasar com login, rotas, store e Axios.",
   "productName": "Quasar App",
   "author": "Elias Lazcano Castro Neto <elias304162@gmail.com>",
   "type": "module",
-  "private": true,
+  "private": false,
+  "keywords": ["quasar","starter","vue3"],
+  "license": "MIT",
   "scripts": {
     "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{js,cjs,mjs,vue}\"",
     "format": "prettier --write \"**/*.{js,vue,css,html,md,json}\" --ignore-path .gitignore",
