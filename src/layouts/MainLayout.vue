@@ -73,9 +73,9 @@
     </q-page-container>
 
     <q-footer bordered :class="{'bg-dark':$q.dark.isActive}" class="q-pa-xs">
-      <div class="flex justify-between">
-        <span class="text-caption">SID 0</span>
-        <span class="text-caption">v{{ Package.version }}</span>
+      <div class="flex justify-between text-caption">
+        <div>SID 0</div>
+        <div>v{{ Package.version }}</div>
       </div>
     </q-footer>
   </q-layout>

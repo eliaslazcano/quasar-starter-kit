@@ -3,15 +3,24 @@ import Package from '../../package.json'
 </script>
 
 <template>
-  <q-layout>
+  <q-layout class="app-background-color">
     <q-page-container>
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition
+          appear
+          mode="out-in"
+          enter-active-class="animated fadeIn fast"
+          leave-active-class="animated fadeOut fast"
+        >
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </q-page-container>
 
     <q-footer bordered :class="{'bg-dark':$q.dark.isActive}" class="q-pa-xs">
-      <div class="flex justify-between">
-        <span class="text-caption">&copy; Elias Lazcano</span>
-        <span class="text-caption">v{{ Package.version }}</span>
+      <div class="flex justify-between text-caption">
+        <div>&copy; Elias Lazcano</div>
+        <div>v{{ Package.version }}</div>
       </div>
     </q-footer>
 
@@ -29,3 +38,9 @@ import Package from '../../package.json'
     </q-page-sticky>
   </q-layout>
 </template>
+
+<style scoped>
+body:not(.body--dark) .app-background-color:not(.dark) {
+  background: linear-gradient(90deg, #0072ff 0%, #00d4ff 100%);
+}
+</style>
