@@ -1,14 +1,26 @@
+import MainLayout from 'layouts/MainLayout.vue'
+import GuestLayout from 'layouts/GuestLayout.vue'
+
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: MainLayout,
+    meta: { requiresAuth: true },
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
+      { path: '', alias: '/home', name: 'home', component: () => import('pages/IndexPage.vue') }
     ]
   },
 
-  // Always leave this as last one,
-  // but you can also remove it
+  {
+    path: '/auth',
+    component: GuestLayout,
+    meta: { requiresNoAuth: true },
+    children: [
+      { path: '', alias: '/login', name: 'login', component: () => import('pages/auth/LoginPage.vue') }
+    ]
+  },
+
+  // Deixar sempre por ultimo
   {
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue')
