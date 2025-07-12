@@ -2,7 +2,12 @@
 
 Elias Starter Kit
 
-## Install the dependencies
+### Clonar/Baixar
+```bash
+git clone https://github.com/eliaslazcano/quasar-starter-kit.git
+```
+
+### Install the dependencies
 ```bash
 npm install
 ```
