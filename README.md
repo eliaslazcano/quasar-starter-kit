@@ -2,7 +2,7 @@
 
 Elias Starter Kit
 
-### Clonar/Baixar
+### Clonar/Download
 ```bash
 git clone https://github.com/eliaslazcano/quasar-starter-kit.git
 ```
