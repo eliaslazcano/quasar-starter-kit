@@ -6,7 +6,11 @@
   "author": "Elias Lazcano Castro Neto <elias304162@gmail.com>",
   "type": "module",
   "private": false,
-  "keywords": ["quasar","starter","vue3"],
+  "keywords": [
+    "quasar",
+    "starter",
+    "vue3"
+  ],
   "license": "MIT",
   "scripts": {
     "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{js,cjs,mjs,vue}\"",
@@ -17,6 +21,7 @@
     "postinstall": "quasar prepare"
   },
   "dependencies": {
+    "@eliaslazcano/utils": "^1.0.24",
     "@quasar/extras": "^1.16.4",
     "axios": "^1.2.1",
     "jwt-decode": "^4.0.0",

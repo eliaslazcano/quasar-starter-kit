@@ -3,14 +3,18 @@ import { ref, reactive } from 'vue'
 import { useSessionStore } from 'stores/session.js'
 import { useRouter, useRoute } from 'vue-router'
 import { useQuasar } from 'quasar'
+import RegisterAccount from 'components/forms/RegisterAccount.vue'
 //import { api } from 'boot/axios'
+
+//TODO - Deletar este token, usado como exemplo apenas
+const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxpYXMgTGF6Y2FubyIsImV4cCI6MTk3MzIzNTAxOX0.Y4jcPBwP9_NWKHcoHqW8DgyXwJmemhbh67GAsrWpe3Q'
 
 const sessionStore = useSessionStore()
 const router = useRouter()
 const route = useRoute()
 const $q = useQuasar()
 
-const loginFormIpt = reactive({ usuario: '', senha: '' })
+const loginFormIpt = reactive({ usuario: '', password: '' })
 const loginFormMostrarSenha = ref(false)
 const loginFormProcessando = ref(false)
 const loginFormSubmit = async () => {
@@ -19,8 +23,7 @@ const loginFormSubmit = async () => {
     //const { data } = await api.post('/auth/login', loginFormIpt)
     //sessionStore.login(data.token)
 
-    const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxpYXMgTGF6Y2FubyIsImV4cCI6MTk3MzIzNTAxOX0.Y4jcPBwP9_NWKHcoHqW8DgyXwJmemhbh67GAsrWpe3Q'
-    await new Promise(resolve => setTimeout(resolve, 5000))
+    await new Promise(resolve => setTimeout(resolve, 2000))
     sessionStore.login(fakeToken)
 
     await router.replace(route.query.redirect ? route.query.redirect : { name: 'home' })
@@ -28,11 +31,28 @@ const loginFormSubmit = async () => {
     loginFormProcessando.value = false
   }
 }
+
+const registerDialog = ref(false)
+const registerLoading = ref(false)
+  try {
+    registerLoading.value = true
+    //const { data } = await api.post('/auth/register', {email, password})
+    //sessionStore.login(data.token)
+
+    console.log('registerSubmit', email, password)
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    sessionStore.login(fakeToken)
+
+    await router.replace(route.query.redirect ? route.query.redirect : { name: 'home' })
+  } finally {
+    registerLoading.value = false
+  }
+}
 </script>
 
 <template>
   <q-page padding class="content-center">
-    <div style="width: 100%; max-width: 22rem" class="q-mx-auto">
+    <div style="width: 100%; max-width: 20rem" class="q-mx-auto">
       <q-card :flat="$q.dark.isActive" :bordered="$q.dark.isActive">
         <q-card-section>
           <div class="text-center q-pb-sm">
@@ -49,6 +69,7 @@ const loginFormSubmit = async () => {
             <q-input
               label="Email"
               autocomplete="username"
+              type="email"
               v-model="loginFormIpt.usuario"
               :disable="loginFormProcessando"
               :rules="[v => (!!v && !!v.trim()) || 'Insira seu email']"
@@ -59,7 +80,7 @@ const loginFormSubmit = async () => {
               :type="loginFormMostrarSenha ? 'text' : 'password'"
               maxlength="16"
               autocomplete="current-password"
-              v-model="loginFormIpt.senha"
+              v-model="loginFormIpt.password"
               :disable="loginFormProcessando"
               :rules="[v => (!!v && !!v.trim()) || 'Insira sua senha']"
               lazy-rules filled
@@ -80,9 +101,21 @@ const loginFormSubmit = async () => {
               :loading="loginFormProcessando"
               unelevated rounded
             />
+            <div class="text-center">
+              <q-btn
+                label="Primeiro Acesso"
+                color="primary"
+                @click="registerDialog = true"
+                flat
+              ></q-btn>
+            </div>
           </q-form>
         </q-card-section>
       </q-card>
     </div>
+
+    <q-dialog v-model="registerDialog" :persistent="registerLoading">
+      <RegisterAccount style="width: 22rem" v-model:loading="registerLoading" @submit="registerSubmit" />
+    </q-dialog>
   </q-page>
 </template>
