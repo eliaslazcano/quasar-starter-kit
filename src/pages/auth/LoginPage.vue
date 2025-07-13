@@ -34,6 +34,7 @@ const loginFormSubmit = async () => {
 
 const registerDialog = ref(false)
 const registerLoading = ref(false)
+const registerSubmit = async (email, password) => {
   try {
     registerLoading.value = true
     //const { data } = await api.post('/auth/register', {email, password})
