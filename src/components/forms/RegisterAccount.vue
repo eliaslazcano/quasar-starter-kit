@@ -16,6 +16,7 @@ const formPasswordRules = [
   v => !/\s/.test(v) || 'A senha não deve conter espaços',
   v => v.length >= 6 || 'A senha deve ter pelo menos 6 caracteres',
 ]
+const formPassword2Rules = [v => (!!v && !!v.trim()) || 'Repita sua nova senha']
 const formShowPassword = ref(false)
 const formLoading = defineModel('loading', {type: Boolean, default: false})
 const formSubmit = async () => {
@@ -65,7 +66,7 @@ const formSubmit = async () => {
           autocomplete="off"
           v-model="formValues.password2"
           :disable="formLoading"
-          :rules="[v => (!!v && !!v.trim()) || 'Repita sua nova senha']"
+          :rules="formPassword2Rules"
           lazy-rules filled
         />
       </q-card-section>
