@@ -26,7 +26,7 @@ const loginFormSubmit = async () => {
     await new Promise(resolve => setTimeout(resolve, 2000))
     sessionStore.login(fakeToken)
 
-    await router.replace(route.query.redirect ? route.query.redirect : { name: 'home' })
+    await router.replace(route.query?.redirect || route.query?.next || { name: 'home' })
   } finally {
     loginFormProcessando.value = false
   }
